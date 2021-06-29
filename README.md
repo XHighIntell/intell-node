@@ -9,5 +9,5 @@ Intell NodeJs is a library that is used in building and deployment processing fo
 ## Install
 
 ```bash
-npm install intell-nodejs
+npm install intell-node
 ```
