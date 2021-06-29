@@ -1,0 +1,13 @@
+{
+    "name": "@types/intell-node",
+    "version": "0.0.0",
+    "author": "X High Intell",
+    "description": "TypeScript definitions for Intell NodeJs.",
+    "keywords": [ "intell-node" ],
+    "license": "MIT",
+
+
+    "main": "",
+    "types": "index.d.ts",
+    "scripts": {}
+}
