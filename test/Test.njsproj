@@ -5,6 +5,7 @@
     <Name>test</Name>
     <RootNamespace>NodejsConsoleApp1</RootNamespace>
     <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+    <ScriptArguments>-clear:"ad \" sa" -mode:development "a \" asd" "123 456"</ScriptArguments>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -31,6 +32,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Content Include="automatic.js" />
+    <Content Include="manual.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Page1.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="promise.js" />
     <Content Include="package.json" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->

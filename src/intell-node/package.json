@@ -1,6 +1,6 @@
 {
     "name": "intell-node",
-    "version": "0.0.0",
+    "version": "0.0.3",
     "author": "X High Intell",
     "description": "Intell framework for NodeJs environment.",
     "keywords": [ "xhighintell", "intell-node", "intell node" ],
@@ -10,20 +10,8 @@
         "type": "git",
         "url": "https://github.com/xhighintell/intell-node.git"
     },
+    
 
-
-    "main": "intell-node.js",
-    "types": "intell-node.d.ts",
-    "typesVersions": {
-        ">=3.1": { "*": [ "*" ] }
-    },
-
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-
-    "devDependencies": {
-        "typescript": "next"
-    }
-
+    "main": "index.js",
+    "types": "types/index.d.ts"
 }

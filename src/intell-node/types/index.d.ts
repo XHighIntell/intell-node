@@ -1,4 +1,5 @@
-﻿declare namespace Intell {
+﻿
+declare namespace Intell {
     interface Namespace {
 
         IO: Intell.IO.Namespace;
@@ -7,18 +8,19 @@
 
         Console: Intell.Console.Namespace;
 
-        createArgumentsObject(): { [T: string]: string };
-
         colors: Colors;
     }
 
     interface Colors {
         reset: string;
-        /** Create foreground color code.*/
+        /** Create foreground color code. */
         fg(n: number): string;
 
-        /** Create background color code.*/
+        /** Create background color code. */
         bg(n: number): string;
+
+        /** Remove all styles in text. */
+        removeAll(text: string): string;
     }
 }
 
@@ -34,7 +36,7 @@ declare namespace Intell.IO {
         CreateDirectory(path: string): void;
         GetParent(Path: string): string;
         GetDirectories(path: string, allDirectories: boolean): string[];
-        GetFiles(path: string, allDirectories: boolean): string[];
+        GetFiles(path: string, allDirectories: boolean): string[];    
         CopyDirectory(sourceDirectoryName: string, destinationDirectoryName: string): void;
         Exists(path: string): boolean;
         Delete(path: string, recursive: boolean): boolean;
@@ -68,17 +70,22 @@ declare namespace Intell.IO {
 
 declare namespace Intell.Diagnostics {
     interface Namespace {
-        CreateArguments(argument: string): Arguments;
+
+        /** [Very Good]Parse arguments string from string. */
+        ParseArguments(arguments: string): ArgumentsInfo;
+
     }
 
-    interface Arguments {
-        action: string;
-        actions: string[];
 
-        options: {
-            [T: string]: boolean | string;
-        }
+    interface ArgumentsInfo {
+        /** All parameters after split space. The parameters are not parsed by anything. */
+        parameters: string[];
 
+        /** Only commands. */
+        commands: string[];
+
+        /** Only switches. */
+        switches: { [T: string]: string | boolean };
     }
 }
 
@@ -92,16 +99,36 @@ declare namespace Intell.Console {
             new(): Enum;
         }
 
+        // === properties === //
+        /** Gets the column position of the cursor within the buffer area. */
+        CursorLeft: number;
+        /** Gets the row position of the cursor within the buffer area. */
+        CursorTop: number;
+
+        // ==== methods ==== //
+        /** Clears the console buffer. */
+        Clear(): void;
         ReadLine(): Promise<string>;
         ReadLine(text: string): Promise<string>;
+        ReadKey(): Promise<string>;
 
+        Write(value: string): void;
+        WriteLine(value: string): void;
+        WriteBackgroundColor(value: number): void;
+        WriteForegroundColor(value: number): void;
+        WriteReset(): void;
 
-        SelectMenu(option: { items: MenuItem[], x: number, y: number }): Promise<MenuItem>;
+        fg(color: number): string;
+        bg(color: number): string;
+        reset: string;
+
+        SetCursorPosition(left: number, top: number): void;
+
+        SelectMenu(option: { items: MenuItem[], x?: number, y?: number }): Promise<MenuItem>;
         SelectEnum(option: { items: MenuItem[] }): Promise<EnumItem>;
-        //SelectBoolean(): Promise<boolean>;
+        SelectBoolean(): Promise<boolean>;
         SelectBoolean(title: string, option: { paddingLeft: number, gap: number }): Promise<boolean>;
     }
-
 
     interface Menu {
         // property 
@@ -136,10 +163,19 @@ declare namespace Intell.Console {
     }
 }
 
-declare module 'intell-node' {
 
-  
+
+declare namespace IntellNode {
+    interface Console {
+
+    }
+    
+}
+
+declare module 'intell-node' {
     const intell: Intell.Namespace;
+
+
     export = intell;
 }
 
